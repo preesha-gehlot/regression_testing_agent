@@ -15,7 +15,9 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 load_dotenv()
 
-with open('./input_data/tfl_openapi_spec_multiple_api_old.yaml', 'r') as f:
+SPECIFICATION_FILE = './input_data/tfl_openapi_spec_multiple_api_old.yaml'
+
+with open(SPECIFICATION_FILE, 'r') as f:
     spec = yaml.safe_load(f)
 
 processed_endpoints = process_all_endpoints(spec)

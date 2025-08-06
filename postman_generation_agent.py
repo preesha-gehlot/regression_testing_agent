@@ -2,7 +2,7 @@ import json
 import yaml
 import logging
 from dotenv import load_dotenv
-from input_data.req_doc_multiple_api import REQUIREMENTS_SPEC_DOC
+from input_data.req_doc import REQUIREMENTS_SPEC_DOC
 from utils import validate_and_clean_json
 from pathlib import Path
 
