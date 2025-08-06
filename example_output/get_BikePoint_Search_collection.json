@@ -1,0 +1,451 @@
+{
+  "info": {
+    "name": "TfL BikePoint Search API Tests",
+    "description": "Comprehensive test collection for the BikePoint Search endpoint",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://api.tfl.gov.uk",
+      "type": "string"
+    },
+    {
+      "key": "app_key",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Positive Tests",
+      "item": [
+        {
+          "name": "Valid search query",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/BikePoint/Search?query=St. James&app_key={{app_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "BikePoint",
+                "Search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "St. James"
+                },
+                {
+                  "key": "app_key",
+                  "value": "{{app_key}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Search with location name",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/BikePoint/Search?query=Hyde Park&app_key={{app_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "BikePoint",
+                "Search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "Hyde Park"
+                },
+                {
+                  "key": "app_key",
+                  "value": "{{app_key}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Edge Cases",
+      "item": [
+        {
+          "name": "Empty query parameter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/BikePoint/Search?query=&app_key={{app_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "BikePoint",
+                "Search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": ""
+                },
+                {
+                  "key": "app_key",
+                  "value": "{{app_key}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400 or 404\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Missing query parameter",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/BikePoint/Search?app_key={{app_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "BikePoint",
+                "Search"
+              ],
+              "query": [
+                {
+                  "key": "app_key",
+                  "value": "{{app_key}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400 or 404\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Query with special characters",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/BikePoint/Search?query=St.%20James'%20%40%23%24%25%5E%26*()%C3%A9%C3%A0%C3%BC&app_key={{app_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "BikePoint",
+                "Search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "St. James' @#$%^&*()\u00e9\u00e0\u00fc"
+                },
+                {
+                  "key": "app_key",
+                  "value": "{{app_key}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Query with only whitespaces",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/BikePoint/Search?query=%20%20%20%20%20&app_key={{app_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "BikePoint",
+                "Search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "     "
+                },
+                {
+                  "key": "app_key",
+                  "value": "{{app_key}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 400 or 404\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Query with escape sequences",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/BikePoint/Search?query=%5Cn%5Ct%5Cr%5C%5C%22%27&app_key={{app_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "BikePoint",
+                "Search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "\\n\\t\\r\\\\\"'"
+                },
+                {
+                  "key": "app_key",
+                  "value": "{{app_key}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Very long query string",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/BikePoint/Search?query=ThisIsAVeryLongQueryStringThatExceedsNormalLengthLimitsAndMayTriggerEdgeCaseBehaviorInTheAPIProcessingSystemWithLotsOfCharacters&app_key={{app_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "BikePoint",
+                "Search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "ThisIsAVeryLongQueryStringThatExceedsNormalLengthLimitsAndMayTriggerEdgeCaseBehaviorInTheAPIProcessingSystemWithLotsOfCharacters"
+                },
+                {
+                  "key": "app_key",
+                  "value": "{{app_key}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200 or 400\", function () {",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400]);",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Numeric query",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/BikePoint/Search?query=12345&app_key={{app_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "BikePoint",
+                "Search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "12345"
+                },
+                {
+                  "key": "app_key",
+                  "value": "{{app_key}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        },
+        {
+          "name": "Single character query",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/BikePoint/Search?query=A&app_key={{app_key}}",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "BikePoint",
+                "Search"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "A"
+                },
+                {
+                  "key": "app_key",
+                  "value": "{{app_key}}"
+                }
+              ]
+            }
+          },
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {",
+                  "    pm.response.to.have.status(200);",
+                  "});",
+                  "",
+                  "pm.test(\"Response is an array\", function () {",
+                  "    pm.expect(pm.response.json()).to.be.an('array');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

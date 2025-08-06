@@ -1,0 +1,2033 @@
+{
+  "info": {
+    "name": "Postman Collection",
+    "description": "Comprehensive regression testing for a given API with maximum test coverage",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "get_Journey_JourneyResults_from_to_to_collection",
+      "item": [
+        {
+          "name": "Positive Tests",
+          "item": [
+            {
+              "name": "All Parameters Test",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&via=51.5033,-0.1195&nationalSearch=true&date=20241215&time=0900&timeIs=Departing&journeyPreference=LeastTime&mode=tube,bus&fromName=London Bridge&toName=Tower Bridge&viaName=London Eye&maxTransferMinutes=10&maxWalkingMinutes=15&walkingSpeed=Average&cyclePreference=AllTheWay&adjustment=TripFirst&bikeProficiency=Moderate&alternativeCycle=true&alternativeWalking=true&applyHtmlMarkup=true&useMultiModalCall=true&walkingOptimization=true&taxiOnlyTrip=false&routeBetweenEntrances=true&useRealTimeLiveArrivals=true&calcOneDirection=true&accessibilityPreference=NoRequirements",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "via",
+                      "value": "51.5033,-0.1195"
+                    },
+                    {
+                      "key": "nationalSearch",
+                      "value": "true"
+                    },
+                    {
+                      "key": "date",
+                      "value": "20241215"
+                    },
+                    {
+                      "key": "time",
+                      "value": "0900"
+                    },
+                    {
+                      "key": "timeIs",
+                      "value": "Departing"
+                    },
+                    {
+                      "key": "journeyPreference",
+                      "value": "LeastTime"
+                    },
+                    {
+                      "key": "mode",
+                      "value": "tube,bus"
+                    },
+                    {
+                      "key": "fromName",
+                      "value": "London Bridge"
+                    },
+                    {
+                      "key": "toName",
+                      "value": "Tower Bridge"
+                    },
+                    {
+                      "key": "viaName",
+                      "value": "London Eye"
+                    },
+                    {
+                      "key": "maxTransferMinutes",
+                      "value": "10"
+                    },
+                    {
+                      "key": "maxWalkingMinutes",
+                      "value": "15"
+                    },
+                    {
+                      "key": "walkingSpeed",
+                      "value": "Average"
+                    },
+                    {
+                      "key": "cyclePreference",
+                      "value": "AllTheWay"
+                    },
+                    {
+                      "key": "adjustment",
+                      "value": "TripFirst"
+                    },
+                    {
+                      "key": "bikeProficiency",
+                      "value": "Moderate"
+                    },
+                    {
+                      "key": "alternativeCycle",
+                      "value": "true"
+                    },
+                    {
+                      "key": "alternativeWalking",
+                      "value": "true"
+                    },
+                    {
+                      "key": "applyHtmlMarkup",
+                      "value": "true"
+                    },
+                    {
+                      "key": "useMultiModalCall",
+                      "value": "true"
+                    },
+                    {
+                      "key": "walkingOptimization",
+                      "value": "true"
+                    },
+                    {
+                      "key": "taxiOnlyTrip",
+                      "value": "false"
+                    },
+                    {
+                      "key": "routeBetweenEntrances",
+                      "value": "true"
+                    },
+                    {
+                      "key": "useRealTimeLiveArrivals",
+                      "value": "true"
+                    },
+                    {
+                      "key": "calcOneDirection",
+                      "value": "true"
+                    },
+                    {
+                      "key": "accessibilityPreference",
+                      "value": "NoRequirements"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "timeIs - Arriving",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&timeIs=Arriving",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "timeIs",
+                      "value": "Arriving"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "journeyPreference - LeastInterchange",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&journeyPreference=LeastInterchange",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "journeyPreference",
+                      "value": "LeastInterchange"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "journeyPreference - LeastWalking",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&journeyPreference=LeastWalking",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "journeyPreference",
+                      "value": "LeastWalking"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "walkingSpeed - Slow",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&walkingSpeed=Slow",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "walkingSpeed",
+                      "value": "Slow"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "walkingSpeed - Fast",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&walkingSpeed=Fast",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "walkingSpeed",
+                      "value": "Fast"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "cyclePreference - None",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&cyclePreference=None",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "cyclePreference",
+                      "value": "None"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "cyclePreference - LeaveAtStation",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&cyclePreference=LeaveAtStation",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "cyclePreference",
+                      "value": "LeaveAtStation"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "cyclePreference - TakeOnTransport",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&cyclePreference=TakeOnTransport",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "cyclePreference",
+                      "value": "TakeOnTransport"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "cyclePreference - CycleHire",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&cyclePreference=CycleHire",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "cyclePreference",
+                      "value": "CycleHire"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bikeProficiency - Easy",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&bikeProficiency=Easy",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "bikeProficiency",
+                      "value": "Easy"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "bikeProficiency - Fast",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&bikeProficiency=Fast",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "bikeProficiency",
+                      "value": "Fast"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "accessibilityPreference - NoSolidStairs",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&accessibilityPreference=NoSolidStairs",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "accessibilityPreference",
+                      "value": "NoSolidStairs"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "accessibilityPreference - NoEscalators",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&accessibilityPreference=NoEscalators",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "accessibilityPreference",
+                      "value": "NoEscalators"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "accessibilityPreference - NoElevators",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&accessibilityPreference=NoElevators",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "accessibilityPreference",
+                      "value": "NoElevators"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "accessibilityPreference - StepFreeToVehicle",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&accessibilityPreference=StepFreeToVehicle",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "accessibilityPreference",
+                      "value": "StepFreeToVehicle"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "accessibilityPreference - StepFreeToPlatform",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&accessibilityPreference=StepFreeToPlatform",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "accessibilityPreference",
+                      "value": "StepFreeToPlatform"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Free-text string causing disambiguation",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/London Bridge/to/Tower Bridge?app_key={{app_key}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "London Bridge",
+                    "to",
+                    "Tower Bridge"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 300\", function () {",
+                      "    pm.response.to.have.status(300);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Edge Tests",
+          "item": [
+            {
+              "name": "Empty via parameter",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&via=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "via",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Empty date parameter",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&date=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "date",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "String with special characters and escape sequences",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&fromName=Test%20%26%20%3C%3E%20%22%27%20%C3%A9%20%E2%9C%93%20%5Cn%5Ct",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "fromName",
+                      "value": "Test & <> \"' é ✓ \\n\\t"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "String with only whitespaces",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&fromName=%20%20%20%20",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "fromName",
+                      "value": "    "
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Invalid date format",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&date=2024-12-15",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "date",
+                      "value": "2024-12-15"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Invalid time format",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&time=09:00:00",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "time",
+                      "value": "09:00:00"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Invalid boolean value",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&nationalSearch=maybe",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "nationalSearch",
+                      "value": "maybe"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Invalid enum value for timeIs",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&timeIs=InvalidValue",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "timeIs",
+                      "value": "InvalidValue"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Invalid enum value for journeyPreference",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&journeyPreference=InvalidPreference",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "journeyPreference",
+                      "value": "InvalidPreference"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Invalid enum value for walkingSpeed",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&walkingSpeed=VeryFast",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "walkingSpeed",
+                      "value": "VeryFast"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Invalid enum value for cyclePreference",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&cyclePreference=InvalidCycleOption",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "cyclePreference",
+                      "value": "InvalidCycleOption"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Invalid enum value for bikeProficiency",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&bikeProficiency=Expert",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "bikeProficiency",
+                      "value": "Expert"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Invalid enum value for accessibilityPreference",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&accessibilityPreference=InvalidAccessibility",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "accessibilityPreference",
+                      "value": "InvalidAccessibility"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Empty mode array",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&mode=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "mode",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Empty bikeProficiency array",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&bikeProficiency=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "bikeProficiency",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Empty accessibilityPreference array",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/Journey/JourneyResults/51.5074,-0.1278/to/51.5155,-0.0922?app_key={{app_key}}&accessibilityPreference=",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "Journey",
+                    "JourneyResults",
+                    "51.5074,-0.1278",
+                    "to",
+                    "51.5155,-0.0922"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    },
+                    {
+                      "key": "accessibilityPreference",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "Tests from output_data/get_Journey_JourneyResults_from_to_to_collection.json",
+      "event": [],
+      "variable": []
+    },
+    {
+      "name": "get_BikePoint_Search_collection",
+      "item": [
+        {
+          "name": "Positive Tests",
+          "item": [
+            {
+              "name": "Valid search query",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/BikePoint/Search?query=St. James&app_key={{app_key}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "BikePoint",
+                    "Search"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "St. James"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Response is an array\", function () {",
+                      "    pm.expect(pm.response.json()).to.be.an('array');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Search with location name",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/BikePoint/Search?query=Hyde Park&app_key={{app_key}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "BikePoint",
+                    "Search"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "Hyde Park"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Response is an array\", function () {",
+                      "    pm.expect(pm.response.json()).to.be.an('array');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Edge Cases",
+          "item": [
+            {
+              "name": "Empty query parameter",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/BikePoint/Search?query=&app_key={{app_key}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "BikePoint",
+                    "Search"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": ""
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Missing query parameter",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/BikePoint/Search?app_key={{app_key}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "BikePoint",
+                    "Search"
+                  ],
+                  "query": [
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Query with special characters",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/BikePoint/Search?query=St.%20James'%20%40%23%24%25%5E%26*()%C3%A9%C3%A0%C3%BC&app_key={{app_key}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "BikePoint",
+                    "Search"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "St. James' @#$%^&*()éàü"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Response is an array\", function () {",
+                      "    pm.expect(pm.response.json()).to.be.an('array');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Query with only whitespaces",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/BikePoint/Search?query=%20%20%20%20%20&app_key={{app_key}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "BikePoint",
+                    "Search"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "     "
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 400 or 404\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([400, 404]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Query with escape sequences",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/BikePoint/Search?query=%5Cn%5Ct%5Cr%5C%5C%22%27&app_key={{app_key}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "BikePoint",
+                    "Search"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "\\n\\t\\r\\\\\"'"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Response is an array\", function () {",
+                      "    pm.expect(pm.response.json()).to.be.an('array');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Very long query string",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/BikePoint/Search?query=ThisIsAVeryLongQueryStringThatExceedsNormalLengthLimitsAndMayTriggerEdgeCaseBehaviorInTheAPIProcessingSystemWithLotsOfCharacters&app_key={{app_key}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "BikePoint",
+                    "Search"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "ThisIsAVeryLongQueryStringThatExceedsNormalLengthLimitsAndMayTriggerEdgeCaseBehaviorInTheAPIProcessingSystemWithLotsOfCharacters"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200 or 400\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 400]);",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Numeric query",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/BikePoint/Search?query=12345&app_key={{app_key}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "BikePoint",
+                    "Search"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "12345"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Response is an array\", function () {",
+                      "    pm.expect(pm.response.json()).to.be.an('array');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            },
+            {
+              "name": "Single character query",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{base_url}}/BikePoint/Search?query=A&app_key={{app_key}}",
+                  "host": [
+                    "{{base_url}}"
+                  ],
+                  "path": [
+                    "BikePoint",
+                    "Search"
+                  ],
+                  "query": [
+                    {
+                      "key": "query",
+                      "value": "A"
+                    },
+                    {
+                      "key": "app_key",
+                      "value": "{{app_key}}"
+                    }
+                  ]
+                }
+              },
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Status code is 200\", function () {",
+                      "    pm.response.to.have.status(200);",
+                      "});",
+                      "",
+                      "pm.test(\"Response is an array\", function () {",
+                      "    pm.expect(pm.response.json()).to.be.an('array');",
+                      "});"
+                    ],
+                    "type": "text/javascript"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "description": "Tests from output_data/get_BikePoint_Search_collection.json",
+      "event": [],
+      "variable": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    },
+    {
+      "key": "app_key",
+      "value": ""
+    }
+  ]
+}

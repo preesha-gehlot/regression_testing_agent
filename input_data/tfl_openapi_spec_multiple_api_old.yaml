@@ -1,0 +1,1141 @@
+openapi: 3.0.0
+servers:
+  - url: https://api.digital.tfl.gov.uk
+info:
+  description: TfL Journey Planner API - Journey Results endpoint only
+  title: Transport for London Journey API
+  version: v1
+paths:
+  "/Journey/JourneyResults/{from}/to/{to}":
+    get:
+      deprecated: false
+      operationId: Journey_JourneyResults
+      parameters:
+        - description: Origin of the journey. Can be WGS84 coordinates expressed as "lat,long", a UK postcode, a Naptan (StopPoint) id, an ICS StopId, or a free-text string (will cause disambiguation unless it exactly matches a point of interest name).
+          in: path
+          name: from
+          required: true
+          schema:
+            type: string
+        - description: Destination of the journey. Can be WGS84 coordinates expressed as "lat,long", a UK postcode, a Naptan (StopPoint) id, an ICS StopId, or a free-text string (will cause disambiguation unless it exactly matches a point of interest name).
+          in: path
+          name: to
+          required: true
+          schema:
+            type: string
+        - description: Travel through point on the journey. Can be WGS84 coordinates expressed as "lat,long", a UK postcode, a Naptan (StopPoint) id, an ICS StopId, or a free-text string (will cause disambiguation unless it exactly matches a point of interest name).
+          in: query
+          name: via
+          required: false
+          schema:
+            type: string
+        - description: Does the journey cover stops outside London? eg. "nationalSearch=true"
+          in: query
+          name: nationalSearch
+          required: false
+          schema:
+            type: boolean
+        - description: The date must be in yyyyMMdd format
+          in: query
+          name: date
+          required: false
+          schema:
+            type: string
+        - description: The time must be in HHmm format
+          in: query
+          name: time
+          required: false
+          schema:
+            type: string
+        - description: 'Does the time given relate to arrival or leaving time? Possible options: "departing" | "arriving"'
+          in: query
+          name: timeIs
+          required: false
+          schema:
+            enum:
+              - Arriving
+              - Departing
+            type: string
+        - description: 'The journey preference eg possible options: "leastinterchange" | "leasttime" | "leastwalking"'
+          in: query
+          name: journeyPreference
+          required: false
+          schema:
+            enum:
+              - LeastInterchange
+              - LeastTime
+              - LeastWalking
+            type: string
+        - description: 'The mode must be a comma separated list of modes. eg possible options: "public-bus,overground,train,tube,coach,dlr,cablecar,tram,river,walking,cycle"'
+          explode: true
+          in: query
+          name: mode
+          required: false
+          schema:
+            items:
+              type: string
+            type: array
+        - description: An optional name to associate with the origin of the journey in the results.
+          in: query
+          name: fromName
+          required: false
+          schema:
+            type: string
+        - description: An optional name to associate with the destination of the journey in the results.
+          in: query
+          name: toName
+          required: false
+          schema:
+            type: string
+        - description: An optional name to associate with the via point of the journey in the results.
+          in: query
+          name: viaName
+          required: false
+          schema:
+            type: string
+        - description: The max walking time in minutes for transfer eg. "120"
+          in: query
+          name: maxTransferMinutes
+          required: false
+          schema:
+            type: string
+        - description: The max walking time in minutes for journeys eg. "120"
+          in: query
+          name: maxWalkingMinutes
+          required: false
+          schema:
+            type: string
+        - description: 'The walking speed. eg possible options: "slow" | "average" | "fast".'
+          in: query
+          name: walkingSpeed
+          required: false
+          schema:
+            enum:
+              - Slow
+              - Average
+              - Fast
+            type: string
+        - description: 'The cycle preference. eg possible options: "allTheWay" | "leaveAtStation" | "takeOnTransport" | "cycleHire"'
+          in: query
+          name: cyclePreference
+          required: false
+          schema:
+            enum:
+              - None
+              - LeaveAtStation
+              - TakeOnTransport
+              - AllTheWay
+              - CycleHire
+            type: string
+        - description: 'Time adjustment command. eg possible options: "TripFirst" | "TripLast"'
+          in: query
+          name: adjustment
+          required: false
+          schema:
+            type: string
+        - description: 'A comma separated list of cycling proficiency levels. eg possible options: "easy,moderate,fast"'
+          explode: true
+          in: query
+          name: bikeProficiency
+          required: false
+          schema:
+            items:
+              enum:
+                - Easy
+                - Moderate
+                - Fast
+              type: string
+            type: array
+        - description: Option to determine whether to return alternative cycling journey
+          in: query
+          name: alternativeCycle
+          required: false
+          schema:
+            type: boolean
+        - description: Option to determine whether to return alternative walking journey
+          in: query
+          name: alternativeWalking
+          required: false
+          schema:
+            type: boolean
+        - description: Flag to determine whether certain text (e.g. walking instructions) should be output with HTML tags or not.
+          in: query
+          name: applyHtmlMarkup
+          required: false
+          schema:
+            type: boolean
+        - description: A boolean to indicate whether or not to return 3 public transport journeys, a bus journey, a cycle hire journey, a personal cycle journey and a walking journey
+          in: query
+          name: useMultiModalCall
+          required: false
+          schema:
+            type: boolean
+        - description: A boolean to indicate whether to optimize journeys using walking
+          in: query
+          name: walkingOptimization
+          required: false
+          schema:
+            type: boolean
+        - description: A boolean to indicate whether to return one or more taxi journeys. Note, setting this to true will override "useMultiModalCall".
+          in: query
+          name: taxiOnlyTrip
+          required: false
+          schema:
+            type: boolean
+        - description: A boolean to indicate whether public transport routes should include directions between platforms and station entrances.
+          in: query
+          name: routeBetweenEntrances
+          required: false
+          schema:
+            type: boolean
+        - description: A boolean to indicate if we want to receive real time live arrivals data where available.
+          in: query
+          name: useRealTimeLiveArrivals
+          required: false
+          schema:
+            type: boolean
+        - description: A boolean to make Journey Planner calculate journeys in one temporal direction only. In other words, only calculate journeys after the 'depart' time, or before the 'arrive' time. By default, the Journey Planner engine (EFA) calculates journeys in both temporal directions.
+          in: query
+          name: calcOneDirection
+          required: false
+          schema:
+            type: boolean
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.ItineraryResult"
+            application/xml:
+              schema:
+                $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.ItineraryResult"
+            text/json:
+              schema:
+                $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.ItineraryResult"
+            text/xml:
+              schema:
+                $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.ItineraryResult"
+          description: OK
+      summary: Perform a Journey Planner search from the parameters specified in simple types
+      tags:
+        - Journey
+  /BikePoint/Search:
+    get:
+      deprecated: false
+      operationId: BikePoint_Search
+      parameters:
+        - description: The search term e.g. "St. James"
+          in: query
+          name: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Place"
+                type: array
+            application/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Place"
+                type: array
+            text/json:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Place"
+                type: array
+            text/xml:
+              schema:
+                items:
+                  $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Place"
+                type: array
+          description: OK
+      summary: "Search for bike stations by their name, a bike point's name often contains information about the name of the street\r\n            or nearby landmarks, for example. Note that the search result does not contain the PlaceProperties i.e. the status\r\n            or occupancy of the BikePoint, to get that information you should retrieve the BikePoint by its id on /BikePoint/id."
+      tags:
+        - BikePoint
+components:
+  schemas:
+    Tfl.Api.Presentation.Entities.JourneyPlanner.ItineraryResult:
+      description: A DTO representing a list of possible journeys.
+      properties:
+        cycleHireDockingStationData:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.JourneyPlannerCycleHireDockingStationData"
+        journeyVector:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.JourneyVector"
+        journeys:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.Journey"
+          type: array
+        lines:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Line"
+          type: array
+        recommendedMaxAgeMinutes:
+          format: int32
+          type: integer
+        searchCriteria:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.SearchCriteria"
+        stopMessages:
+          items:
+            type: string
+          type: array
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.JourneyPlannerCycleHireDockingStationData:
+      properties:
+        destinationId:
+          type: string
+        destinationNumberOfBikes:
+          format: int32
+          type: integer
+        destinationNumberOfEmptySlots:
+          format: int32
+          type: integer
+        originId:
+          type: string
+        originNumberOfBikes:
+          format: int32
+          type: integer
+        originNumberOfEmptySlots:
+          format: int32
+          type: integer
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.JourneyVector:
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+        uri:
+          type: string
+        via:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.Journey:
+      description: Object that represents an end to end journey (see schematic).
+      properties:
+        arrivalDateTime:
+          format: date-time
+          type: string
+        duration:
+          format: int32
+          type: integer
+        fare:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.JourneyFare"
+        legs:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.Leg"
+          type: array
+        startDateTime:
+          format: date-time
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.Line:
+      properties:
+        created:
+          format: date-time
+          type: string
+        crowding:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Crowding"
+        disruptions:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Disruption"
+          type: array
+        id:
+          type: string
+        lineStatuses:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.LineStatus"
+          type: array
+        modeName:
+          type: string
+        modified:
+          format: date-time
+          type: string
+        name:
+          type: string
+        routeSections:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.MatchedRoute"
+          type: array
+        serviceTypes:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.LineServiceTypeInfo"
+          type: array
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.SearchCriteria:
+      properties:
+        dateTime:
+          format: date-time
+          type: string
+        dateTimeType:
+          enum:
+            - Arriving
+            - Departing
+          type: string
+        timeAdjustments:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustments"
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustments:
+      properties:
+        earlier:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustment"
+        earliest:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustment"
+        later:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustment"
+        latest:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustment"
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.TimeAdjustment:
+      properties:
+        date:
+          type: string
+        time:
+          type: string
+        timeIs:
+          type: string
+        uri:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.JourneyFare:
+      properties:
+        caveats:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.FareCaveat"
+          type: array
+        fares:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.Fare"
+          type: array
+        totalCost:
+          format: int32
+          type: integer
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.FareCaveat:
+      properties:
+        text:
+          type: string
+        type:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.Fare:
+      properties:
+        chargeLevel:
+          type: string
+        chargeProfileName:
+          type: string
+        cost:
+          format: int32
+          type: integer
+        highZone:
+          format: int32
+          type: integer
+        isHopperFare:
+          type: boolean
+        lowZone:
+          format: int32
+          type: integer
+        offPeak:
+          format: int32
+          type: integer
+        peak:
+          format: int32
+          type: integer
+        taps:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.FareTap"
+          type: array
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.FareTap:
+      properties:
+        atcoCode:
+          type: string
+        tapDetails:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.FareTapDetails"
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.FareTapDetails:
+      properties:
+        busRouteId:
+          type: string
+        hostDeviceType:
+          type: string
+        modeType:
+          type: string
+        nationalLocationCode:
+          format: int32
+          type: integer
+        tapTimestamp:
+          format: date-time
+          type: string
+        validationType:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.Leg:
+      properties:
+        arrivalPoint:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Point"
+        arrivalTime:
+          format: date-time
+          type: string
+        departurePoint:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Point"
+        departureTime:
+          format: date-time
+          type: string
+        disruptions:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Disruption"
+          type: array
+        distance:
+          format: double
+          type: number
+        duration:
+          format: int32
+          type: integer
+        hasFixedLocations:
+          readOnly: true
+          type: boolean
+        instruction:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Instruction"
+        interChangeDuration:
+          type: string
+        interChangePosition:
+          type: string
+        isDisrupted:
+          readOnly: true
+          type: boolean
+        mode:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Identifier"
+        obstacles:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.Obstacle"
+          type: array
+        path:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.Path"
+        plannedWorks:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.PlannedWork"
+          type: array
+        routeOptions:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.JourneyPlanner.RouteOption"
+          type: array
+        scheduledArrivalTime:
+          format: date-time
+          type: string
+        scheduledDepartureTime:
+          format: date-time
+          type: string
+        speed:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.Point:
+      description: Represents a point located at a latitude and longitude using the WGS84 co-ordinate system.
+      properties:
+        lat:
+          description: WGS84 latitude of the location.
+          format: double
+          type: number
+        lineGroup:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.LineGroup"
+          type: array
+        lineModeGroups:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.LineModeGroup"
+          type: array
+        lines:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Identifier"
+          type: array
+        lon:
+          description: WGS84 longitude of the location.
+          format: double
+          type: number
+        modes:
+          items:
+            type: string
+          type: array
+        naptanId:
+          type: string
+        naptanMode:
+          type: string
+        placeType:
+          description: The type of Place. See /Place/Meta/placeTypes for possible values.
+          type: string
+        platformName:
+          type: string
+        smsCode:
+          type: string
+        stationNaptan:
+          type: string
+        status:
+          type: boolean
+        stopLetter:
+          description: The stop letter, if it could be cleansed from the Indicator e.g. "K"
+          type: string
+        stopType:
+          type: string
+        url:
+          description: The unique location of this resource.
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.RouteSectionNaptanEntrySequence:
+      properties:
+        ordinal:
+          format: int32
+          type: integer
+        stopPoint:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.StopPoint"
+      type: object
+    Tfl.Api.Presentation.Entities.ValidityPeriod:
+      description: Represents a period for which a planned works is valid.
+      properties:
+        fromDate:
+          description: Gets or sets the start date.
+          format: date-time
+          type: string
+        isNow:
+          description: If true is a realtime status rather than planned or info
+          type: boolean
+        toDate:
+          description: Gets or sets the end date.
+          format: date-time
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.PassengerFlow:
+      properties:
+        timeSlice:
+          description: Time in 24hr format with 15 minute intervals e.g. 0500-0515, 0515-0530 etc.
+          type: string
+        value:
+          description: Count of passenger flow towards a platform
+          format: int32
+          type: integer
+      type: object
+    Tfl.Api.Presentation.Entities.TrainLoading:
+      properties:
+        direction:
+          description: Direction in regards to Journey Planner i.e. inbound or outbound
+          type: string
+        line:
+          description: The Line Name e.g. "Victoria"
+          type: string
+        lineDirection:
+          description: Direction of the Line e.g. NB, SB, WB etc.
+          type: string
+        naptanTo:
+          description: Naptan of the adjacent station
+          type: string
+        platformDirection:
+          description: Direction displayed on the platform e.g. NB, SB, WB etc.
+          type: string
+        timeSlice:
+          description: Time in 24hr format with 15 minute intervals e.g. 0500-0515, 0515-0530 etc.
+          type: string
+        value:
+          description: "Scale between 1-6, \r\n             1 = Very quiet, 2 = Quiet, 3 = Fairly busy, 4 = Busy, 5 = Very busy, 6 = Exceptionally busy"
+          format: int32
+          type: integer
+      type: object
+    Tfl.Api.Presentation.Entities.AdditionalProperties:
+      properties:
+        category:
+          type: string
+        key:
+          type: string
+        modified:
+          format: date-time
+          type: string
+        sourceSystemKey:
+          type: string
+        value:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.Place:
+      properties:
+        additionalProperties:
+          description: A bag of additional key/value pairs with extra information about this place.
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.AdditionalProperties"
+          type: array
+        children:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Place"
+          type: array
+        childrenUrls:
+          items:
+            type: string
+          type: array
+        commonName:
+          description: A human readable name.
+          type: string
+        distance:
+          description: "The distance of the place from its search point, if this is the result\r\n            of a geographical search, otherwise zero."
+          format: double
+          type: number
+        id:
+          description: A unique identifier.
+          type: string
+        lat:
+          description: WGS84 latitude of the location.
+          format: double
+          type: number
+        lon:
+          description: WGS84 longitude of the location.
+          format: double
+          type: number
+        placeType:
+          description: The type of Place. See /Place/Meta/placeTypes for possible values.
+          type: string
+        url:
+          description: The unique location of this resource.
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.LineGroup:
+      properties:
+        lineIdentifier:
+          items:
+            type: string
+          type: array
+        naptanIdReference:
+          type: string
+        stationAtcoCode:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.LineModeGroup:
+      properties:
+        lineIdentifier:
+          items:
+            type: string
+          type: array
+        modeName:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.Disruption:
+      description: Represents a disruption to a route within the transport network.
+      properties:
+        additionalInfo:
+          description: Gets or sets the additionaInfo of this disruption.
+          type: string
+        affectedRoutes:
+          description: Gets or sets the routes affected by this disruption
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.DisruptedRoute"
+          type: array
+        affectedStops:
+          description: Gets or sets the stops affected by this disruption
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.StopPoint"
+          type: array
+        category:
+          description: Gets or sets the category of this dispruption.
+          enum:
+            - Undefined
+            - RealTime
+            - PlannedWork
+            - Information
+            - Event
+            - Crowding
+            - StatusAlert
+          type: string
+        categoryDescription:
+          description: Gets or sets the description of the category.
+          type: string
+        closureText:
+          description: Text describing the closure type
+          type: string
+        created:
+          description: Gets or sets the date/time when this disruption was created.
+          format: date-time
+          type: string
+        description:
+          description: Gets or sets the description of this disruption.
+          type: string
+        lastUpdate:
+          description: Gets or sets the date/time when this disruption was last updated.
+          format: date-time
+          type: string
+        summary:
+          description: Gets or sets the summary of this disruption.
+          type: string
+        type:
+          description: Gets or sets the disruption type of this dispruption.
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.Instruction:
+      properties:
+        detailed:
+          type: string
+        steps:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.InstructionStep"
+          type: array
+        summary:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.Identifier:
+      properties:
+        crowding:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Crowding"
+        fullName:
+          type: string
+        id:
+          type: string
+        motType:
+          type: string
+        name:
+          type: string
+        network:
+          type: string
+        routeType:
+          enum:
+            - Unknown
+            - All
+            - Cycle Superhighways
+            - Quietways
+            - Cycleways
+            - Mini-Hollands
+            - Central London Grid
+            - Streetspace Route
+          type: string
+        status:
+          enum:
+            - Unknown
+            - All
+            - Open
+            - In Progress
+            - Planned
+            - Planned - Subject to feasibility and consultation.
+            - Not Open
+          type: string
+        type:
+          type: string
+        uri:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.Obstacle:
+      properties:
+        incline:
+          type: string
+        position:
+          type: string
+        stopId:
+          format: int32
+          type: integer
+        type:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.Path:
+      properties:
+        elevation:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Common.JourneyPlanner.JpElevation"
+          type: array
+        lineString:
+          type: string
+        stopPoints:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Identifier"
+          type: array
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.PlannedWork:
+      properties:
+        createdDateTime:
+          format: date-time
+          type: string
+        description:
+          type: string
+        id:
+          type: string
+        lastUpdateDateTime:
+          format: date-time
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.JourneyPlanner.RouteOption:
+      properties:
+        direction:
+          description: The direction of the route, i.e. outbound or inbound.
+          type: string
+        directions:
+          items:
+            type: string
+          type: array
+        id:
+          description: The Id of the route
+          type: string
+        lineIdentifier:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Identifier"
+        name:
+          description: Name such as "72"
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.Crowding:
+      properties:
+        passengerFlows:
+          description: Busiest times at a station (static information)
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.PassengerFlow"
+          type: array
+        trainLoadings:
+          description: Train Loading on a scale 1-6, 1 being "Very quiet" and 6 being "Exceptionally busy" (static information)
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.TrainLoading"
+          type: array
+      type: object
+    Tfl.Api.Presentation.Entities.LineStatus:
+      properties:
+        created:
+          format: date-time
+          type: string
+        disruption:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Disruption"
+        id:
+          format: int32
+          type: integer
+        lineId:
+          type: string
+        modified:
+          format: date-time
+          type: string
+        reason:
+          type: string
+        statusSeverity:
+          format: int32
+          type: integer
+        statusSeverityDescription:
+          type: string
+        validityPeriods:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.ValidityPeriod"
+          type: array
+      type: object
+    Tfl.Api.Presentation.Entities.MatchedRoute:
+      description: Description of a Route used in Route search results.
+      properties:
+        destination:
+          description: The Id (NaPTAN code) or the Destination StopPoint
+          type: string
+        destinationName:
+          description: The name of the Destination StopPoint
+          type: string
+        direction:
+          description: Inbound or Outbound
+          type: string
+        name:
+          description: Name such as "72"
+          type: string
+        originationName:
+          description: The name of the Origin StopPoint
+          type: string
+        originator:
+          description: The Id (NaPTAN code) of the Origin StopPoint
+          type: string
+        routeCode:
+          description: The route code
+          type: string
+        serviceType:
+          description: Regular or Night
+          type: string
+        validFrom:
+          description: The DateTime that the Service containing this Route is valid from.
+          format: date-time
+          type: string
+        validTo:
+          description: The DateTime that the Service containing this Route is valid until.
+          format: date-time
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.LineServiceTypeInfo:
+      properties:
+        name:
+          type: string
+        uri:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.InstructionStep:
+      properties:
+        cumulativeDistance:
+          format: int32
+          type: integer
+        cumulativeTravelTime:
+          format: int32
+          type: integer
+        description:
+          type: string
+        descriptionHeading:
+          type: string
+        distance:
+          format: int32
+          type: integer
+        latitude:
+          format: double
+          type: number
+        longitude:
+          format: double
+          type: number
+        pathAttribute:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.PathAttribute"
+        skyDirection:
+          format: int32
+          type: integer
+        skyDirectionDescription:
+          enum:
+            - North
+            - NorthEast
+            - East
+            - SouthEast
+            - South
+            - SouthWest
+            - West
+            - NorthWest
+          type: string
+        streetName:
+          type: string
+        trackType:
+          enum:
+            - CycleSuperHighway
+            - CanalTowpath
+            - QuietRoad
+            - ProvisionForCyclists
+            - BusyRoads
+            - None
+            - PushBike
+            - Quietway
+          type: string
+        turnDirection:
+          type: string
+      type: object
+    Tfl.Api.Presentation.Entities.PathAttribute:
+      properties:
+        name:
+          type: string
+        value:
+          type: string
+      type: object
+    Tfl.Api.Common.JourneyPlanner.JpElevation:
+      properties:
+        distance:
+          format: int32
+          type: integer
+        endLat:
+          format: double
+          type: number
+        endLon:
+          format: double
+          type: number
+        gradient:
+          format: double
+          type: number
+        heightFromPreviousPoint:
+          format: int32
+          type: integer
+        startLat:
+          format: double
+          type: number
+        startLon:
+          format: double
+          type: number
+      type: object
+    Tfl.Api.Presentation.Entities.DisruptedRoute:
+      description: keep old RouteSection name so as not to break contract
+      properties:
+        destinationName:
+          description: The name of the Destination StopPoint
+          type: string
+        direction:
+          description: Inbound or Outbound
+          type: string
+        id:
+          description: The Id of the route
+          type: string
+        isEntireRouteSection:
+          description: Whether this represents the entire route section
+          type: boolean
+        lineId:
+          description: The Id of the Line
+          type: string
+        lineString:
+          description: The co-ordinates of the route's path as a geoJSON lineString
+          type: string
+        name:
+          description: Name such as "72"
+          type: string
+        originationName:
+          description: The name of the Origin StopPoint
+          type: string
+        routeCode:
+          description: The route code
+          type: string
+        routeSectionNaptanEntrySequence:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.RouteSectionNaptanEntrySequence"
+          type: array
+        validFrom:
+          description: The DateTime that the Service containing this Route is valid from.
+          format: date-time
+          type: string
+        validTo:
+          description: The DateTime that the Service containing this Route is valid until.
+          format: date-time
+          type: string
+        via:
+          $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.RouteSectionNaptanEntrySequence"
+      type: object
+    Tfl.Api.Presentation.Entities.StopPoint:
+      properties:
+        accessibilitySummary:
+          type: string
+        additionalProperties:
+          description: A bag of additional key/value pairs with extra information about this place.
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.AdditionalProperties"
+          type: array
+        children:
+          items:
+            $ref: "#/components/schemas/Tfl.Api.Presentation.Entities.Place"
+          type: array
+        childrenUrls:
+          items:
+            type: string
+          type: array
+        commonName:
+          description: A human readable name.
+          type: string
+        distance:
+          description: "The distance of the place from its search point, if this is the result\r\n            of a geographical search, otherwise zero."
+          format: double
+          type: number
+        fullName:
+          type: string
+        hubNaptanCode:
+          type: string
+        icsCode:
+          type: string
+        id:
+          description: A unique identifier.
+          type: string
+        indicator:
+          description: The indicator of the stop point e.g. "Stop K"
+          type: string
+        individualStopId:
+          type: string
+        lat:
+          description: WGS84 latitude of the location.
+          format: double
+          type: number
+  securitySchemes:
+    apiKey:
+      description: API Key Authentication
+      in: query
+      name: app_key
+      type: apiKey
+    appId:
+      description: Application ID
+      in: query
+      name: app_id
+      type: apiKey
